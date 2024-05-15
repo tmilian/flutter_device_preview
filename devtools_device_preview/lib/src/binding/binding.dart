@@ -115,12 +115,12 @@ class PreviewWidgetsFlutterBinding extends BindingBase
 
   @override
   void initRenderView() {
-    super.initRenderView();
-    renderView = PreviewRenderView(
-      configuration: createViewConfiguration(),
-      window: window,
-    );
-    renderView.prepareInitialFrame();
+    // super.initRenderView();
+    // renderView = PreviewRenderView(
+    //   configuration: createViewConfiguration(),
+    //   window: window,
+    // );
+    // renderView.prepareInitialFrame();
   }
 
   @override

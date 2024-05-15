@@ -81,13 +81,6 @@ class PreviewWindow implements ui.SingletonFlutterWindow {
       parent.onSemanticsEnabledChanged = value;
 
   @override
-  ui.SemanticsActionCallback? get onSemanticsAction => parent.onSemanticsAction;
-
-  @override
-  set onSemanticsAction(ui.SemanticsActionCallback? value) =>
-      parent.onSemanticsAction = value;
-
-  @override
   ui.VoidCallback? get onTextScaleFactorChanged =>
       parent.onTextScaleFactorChanged;
 
@@ -159,24 +152,13 @@ class PreviewWindow implements ui.SingletonFlutterWindow {
     onLocaleChanged?.call();
   }
 
-  ui.WindowPadding? _previewPadding;
+  ui.ViewPadding? _previewPadding;
 
   @override
-  ui.WindowPadding get padding => _previewPadding ?? parent.padding;
+  ui.ViewPadding get padding => _previewPadding ?? parent.padding;
 
-  set padding(ui.WindowPadding? value) {
+  set padding(ui.ViewPadding? value) {
     _previewPadding = value;
-    onMetricsChanged?.call();
-  }
-
-  ui.Rect? _previewPhysicalGeometry;
-
-  @override
-  ui.Rect get physicalGeometry =>
-      _previewPhysicalGeometry ?? parent.physicalGeometry;
-
-  set physicalGeometry(ui.Rect? value) {
-    _previewPhysicalGeometry = value;
     onMetricsChanged?.call();
   }
 
@@ -205,8 +187,8 @@ class PreviewWindow implements ui.SingletonFlutterWindow {
   ui.PlatformDispatcher get platformDispatcher => parent.platformDispatcher;
 
   @override
-  void render(ui.Scene scene) {
-    parent.render(scene);
+  void render(ui.Scene scene, {Size? size}) {
+    parent.render(scene, size: size);
   }
 
   @override
@@ -228,7 +210,7 @@ class PreviewWindow implements ui.SingletonFlutterWindow {
   }
 
   @override
-  ui.WindowPadding get systemGestureInsets => parent.systemGestureInsets;
+  ui.ViewPadding get systemGestureInsets => parent.systemGestureInsets;
 
   double? _previewTextScaleFactor;
 
@@ -246,17 +228,14 @@ class PreviewWindow implements ui.SingletonFlutterWindow {
       parent.updateSemantics(update);
 
   @override
-  ui.ViewConfiguration get viewConfiguration => parent.viewConfiguration;
+  ui.ViewPadding get viewInsets => parent.viewInsets;
+
+  ui.ViewPadding? _previewViewPadding;
 
   @override
-  ui.WindowPadding get viewInsets => parent.viewInsets;
+  ui.ViewPadding get viewPadding => _previewViewPadding ?? parent.viewPadding;
 
-  ui.WindowPadding? _previewViewPadding;
-
-  @override
-  ui.WindowPadding get viewPadding => _previewViewPadding ?? parent.viewPadding;
-
-  set viewPadding(ui.WindowPadding? value) {
+  set viewPadding(ui.ViewPadding? value) {
     _previewViewPadding = value;
     onMetricsChanged?.call();
   }
@@ -278,9 +257,25 @@ class PreviewWindow implements ui.SingletonFlutterWindow {
 
   @override
   String? get systemFontFamily => parent.systemFontFamily;
+
+  @override
+  ui.Display get display => parent.display;
+
+  @override
+  ui.GestureSettings get gestureSettings => parent.gestureSettings;
+
+  @override
+  bool get nativeSpellCheckServiceDefined =>
+      parent.nativeSpellCheckServiceDefined;
+
+  @override
+  ui.ViewConstraints get physicalConstraints => parent.physicalConstraints;
+
+  @override
+  int get viewId => parent.viewId;
 }
 
-class PreviewWindowPadding implements ui.WindowPadding {
+class PreviewWindowPadding implements ui.ViewPadding {
   const PreviewWindowPadding({
     required this.left,
     required this.top,
